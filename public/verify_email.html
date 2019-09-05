@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Akvo.org</title>
+  </head>
+  <body>
+  <div id="app">
+    <h1>Akvo.org</h1>
+  </div>
+  <script>
+
+    function getUrlParameter(name) {
+      name = name.replace(/[\[]/, '\\[').replace(/[\]]/, '\\]');
+      var regex = new RegExp('[\\?&]' + name + '=([^&#]*)');
+      var results = regex.exec(location.search);
+      return results === null ? '' : decodeURIComponent(results[1].replace(/\+/g, ' '));
+    };
+
+    function node(success) {
+      if (success === 'true') {
+        return document.createTextNode('Email verified');
+      } 
+      return document.createTextNode('Email not verified');
+    }
+    
+    function init() {
+      const rootElement = document.getElementById("app");
+      const success = getUrlParameter('success');
+      const responseElement = node(success);
+    
+      rootElement.appendChild(responseElement);
+    }
+
+    init();
+  </script>
+  </body>
+</html>
