@@ -1,0 +1,9 @@
+script: echo $TRAVIS_COMMIT > commit
+
+deploy:
+  provider: gcs
+  access_key_id: ""
+  secret_access_key: ""
+  bucket: "akvo-public"
+  local-dir: "public"
+  skip_cleanup: true
