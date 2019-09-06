@@ -1,4 +1,4 @@
-script: echo $TRAVIS_COMMIT > commit
+script: echo $TRAVIS_COMMIT > ./public/commit
 deploy:
   provider: gcs
   access_key_id:
