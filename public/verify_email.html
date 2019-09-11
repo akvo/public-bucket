@@ -102,7 +102,11 @@
         statusContainer.appendChild(successText);
         return statusContainer;
       } 
-      const errorText = document.createTextNode('An email has been sent. Please verify your email address before logging in.');
+      const header = document.createElement('h1');
+      const headerText = document.createTextNode('Welcome!')
+      header.appendChild(headerText);     
+      statusContainer.appendChild(header);     
+      const errorText = document.createTextNode('Thanks for signing up! We just need you to verify your email address to complete setting up your account. Check your email inbox to verify your email.');
       statusContainer.classList.add('error');
       statusContainer.appendChild(errorText);
       return statusContainer;
