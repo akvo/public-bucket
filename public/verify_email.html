@@ -1,124 +1,122 @@
+<!DOCTYPE html>
 <html>
 <head>
-<meta charset="UTF-8">
-<meta name="description" content="Akvo Flow: field level operations watch" />
-<meta http-equiv="refresh">
-<title>Akvo - verify email</title>
-<link rel="shortcut icon" href="/favicon.ico" />
-<!--[if lt IE 9]>
-      <script src="https://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
-    <![endif]-->
+  <meta charset="UTF-8">
+  <meta name="description" content="Akvo: verify email" />
+  <meta http-equiv="refresh">
+  <meta name="robots" content="noindex">
+  <title>Akvo - verify email</title>
+  <link rel="shortcut icon" href="/favicon.ico" />
+  <!--[if lt IE 9]>
+    <script src="https://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+  <![endif]-->
 
-<style>
-body, html {
-	margin: 0;
-	padding: 0;
-	font-family: 'Helvetica Neue', helvetica, Arial, sans-serif;
-
-}
-.msgWrap {
-	position: relative;
-	width: 100%;
-	height: 100%;
-	background: #fffff;
-}
-.msgContainer {
-	position: absolute;
-	max-height: calc(100vh - 40px);
-	width: 25%;
-    min-height: auto;
-    height: auto;
-    top: 50%;
-    left: 50%; 
-    padding:20px 10px;
-    -webkit-transform: translate(-50%, -50%);
-    -moz-transform: translate(-50%, -50%); 
-    -ms-transform: translate(-50%, -50%); 
-    -o-transform: translate(-50%, -50%); 
-    transform: translate(-50%, -50%); 
-    box-shadow: 0 0 20px rgba(32,32,36,0.2);
+  <style>
+    body, html {
+      margin: 0;
+      padding: 0;
+      font-family: 'Helvetica Neue', helvetica, Arial, sans-serif;
     }
-h1 {
-	padding: 0 10px;
-	text-align: center;
-	font-size: 1.2em;
-}
-p {
-	text-align: center;	
-	font-size: 1.2em;
-
-}
-p:after {
-	content: "";
-	width: 50%;
-	border-bottom: 1px solid rgba(100,100,100,0.5);
-	display: block;
-	margin: 3em auto;
-	padding: 0 5px;
-}
-img {
-	position: relative;
-	display: block;
-	width:25%;
-	margin: 0 auto 1em auto;
-	max-width: 280px;
-	min-width:150px;
-}
-#urlLoc {
-	font-weight: normal;
-}
-.statusContainer {
-  width: 100%;
-  text-align: center;
-}
-.ok {
-  color: #04AD8C;
-}
-.error {
-  color: #F1614F;
-}
-</style>
+    .msgWrap {
+      position: relative;
+      width: 100%;
+      height: 100%;
+      background: #ffffff;
+    }
+    .msgContainer {
+      position: absolute;
+      max-height: calc(100vh - 40px);
+      width: 25%;
+      min-height: auto;
+      height: auto;
+      top: 50%;
+      left: 50%; 
+      padding:20px 10px;
+      -webkit-transform: translate(-50%, -50%);
+      -moz-transform: translate(-50%, -50%); 
+      -ms-transform: translate(-50%, -50%); 
+      -o-transform: translate(-50%, -50%); 
+      transform: translate(-50%, -50%); 
+      box-shadow: 0 0 20px rgba(32,32,36,0.2);
+    }
+    h1 {
+      padding: 0 10px;
+      text-align: center;
+      font-size: 1.2em;
+    }
+    p {
+      text-align: center;	
+      font-size: 1.2em;
+    }
+    p:after {
+      content: "";
+      width: 50%;
+      border-bottom: 1px solid rgba(100,100,100,0.5);
+      display: block;
+      margin: 3em auto;
+      padding: 0 5px;
+    }
+    img {
+      position: relative;
+      display: block;
+      width:25%;
+      margin: 0 auto 1em auto;
+      max-width: 280px;
+      min-width:150px;
+    }
+    #urlLoc {
+	    font-weight: normal;
+    }
+    .statusContainer {
+      width: 100%;
+      text-align: center;
+    }
+    .ok {
+      color: #04AD8C;
+    }
+    .error {
+      color: #F1614F;
+    }
+  </style>
 </head>
 <body>
-<div class="msgWrap"> 
-  	<div class="msgContainer">
-      <img src="https://akvo-public.storage.googleapis.com/AkvoLogo.svg" title="Welcome to Akvo Flow" alt="Welcome to Akvo Flow" />
+  <div class="msgWrap"> 
+    <div class="msgContainer">
+      <img src="https://akvo-public.storage.googleapis.com/AkvoLogo.svg" title="Welcome to Akvo" alt="Welcome to Akvo" />
       <div id="app"></div>
-	</div>
-</div>
-<script type="text/javascript">
-  function getUrlParameter(name) {
-    name = name.replace(/[\[]/, '\\[').replace(/[\]]/, '\\]');
-    var regex = new RegExp('[\\?&]' + name + '=([^&#]*)');
-    var results = regex.exec(location.search);
-    return results === null ? '' : decodeURIComponent(results[1].replace(/\+/g, ' '));
-  };
+	  </div>
+  </div>
+  <script type="text/javascript">
+    function getUrlParameter(name) {
+      name = name.replace(/[\[]/, '\\[').replace(/[\]]/, '\\]');
+      var regex = new RegExp('[\\?&]' + name + '=([^&#]*)');
+      var results = regex.exec(location.search);
+      return results === null ? '' : decodeURIComponent(results[1].replace(/\+/g, ' '));
+    };
 
-  function node(success) {
-    const statusContainer = document.createElement('div');
-    statusContainer.classList.add('statusContainer');
-    if (success === 'true') {
-      const successText = document.createTextNode('Email verified!'); 
-      statusContainer.classList.add('ok') 
-      statusContainer.appendChild(successText);
+    function node(success) {
+      const statusContainer = document.createElement('div');
+      statusContainer.classList.add('statusContainer');
+      if (success === 'true') {
+        const successText = document.createTextNode('Email verified!'); 
+        statusContainer.classList.add('ok');
+        statusContainer.appendChild(successText);
+        return statusContainer;
+      } 
+      const errorText = document.createTextNode('An email has been sent. Please verify your email address before logging in!');
+      statusContainer.classList.add('error');
+      statusContainer.appendChild(errorText);
       return statusContainer;
-    } 
-    const errorText = document.createTextNode('An email has been sent. Please verify your email address before logging in!');
-    statusContainer.classList.add('error');
-    statusContainer.appendChild(errorText);
-    return statusContainer;
-    }
+    };
 
-  function init() {
+    function init() {
       const rootElement = document.getElementById("app");
       const success = getUrlParameter('success');
       const responseElement = node(success);
-    
       rootElement.appendChild(responseElement);
     }
 
-  init();
-
-</script>
+    init();
+  </script>
 </body>
 </html>
