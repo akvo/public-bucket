@@ -74,7 +74,7 @@
       color: #04AD8C;
     }
     .error {
-      color: #F1614F;
+      color: #333;
     }
   </style>
 </head>
@@ -102,7 +102,7 @@
         statusContainer.appendChild(successText);
         return statusContainer;
       } 
-      const errorText = document.createTextNode('An email has been sent. Please verify your email address before logging in!');
+      const errorText = document.createTextNode('An email has been sent. Please verify your email address before logging in.');
       statusContainer.classList.add('error');
       statusContainer.appendChild(errorText);
       return statusContainer;
