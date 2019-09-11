@@ -67,22 +67,58 @@ img {
 #urlLoc {
 	font-weight: normal;
 }
+.statusContainer {
+  width: 100%;
+  text-align: center;
+}
+.ok {
+  color: #04AD8C;
+}
+.error {
+  color: #F1614F;
+}
 </style>
 </head>
 <body>
 <div class="msgWrap"> 
   	<div class="msgContainer">
-  		<img src="https://akvo-public.storage.googleapis.com/AkvoLogo.svg" title="Welcome to Akvo Flow" alt="Welcome to Akvo Flow" />
-	  <p>An email has been sent. Please verify your emial address before logging in to:<br><span id="urlLoc"></span></p>
+      <img src="https://akvo-public.storage.googleapis.com/AkvoLogo.svg" title="Welcome to Akvo Flow" alt="Welcome to Akvo Flow" />
+      <div id="app"></div>
 	</div>
 </div>
 <script type="text/javascript">
-	function currentUrl() {
-		var currentLocation = window.location.href;
-		var currentLocationMinus = currentLocation.substr(8).slice(0, 0);
-	  	return currentLocationMinus;
-	}
-	document.getElementById("urlLoc").innerHTML = currentUrl();
+  function getUrlParameter(name) {
+    name = name.replace(/[\[]/, '\\[').replace(/[\]]/, '\\]');
+    var regex = new RegExp('[\\?&]' + name + '=([^&#]*)');
+    var results = regex.exec(location.search);
+    return results === null ? '' : decodeURIComponent(results[1].replace(/\+/g, ' '));
+  };
+
+  function node(success) {
+    const statusContainer = document.createElement('div');
+    statusContainer.classList.add('statusContainer');
+    if (success === 'true') {
+      const successText = document.createTextNode('Email verified!'); 
+      statusContainer.classList.add('ok') 
+      statusContainer.appendChild(successText);
+      return statusContainer;
+    } 
+    const errorText = document.createTextNode('An email has been sent. Please verify your email address before logging in!');
+    statusContainer.classList.add('error');
+    statusContainer.appendChild(errorText);
+    return statusContainer;
+    }
+
+  function init() {
+      const rootElement = document.getElementById("app");
+      const success = getUrlParameter('success');
+      const responseElement = node(success);
+    
+      rootElement.appendChild(responseElement);
+    }
+
+  init();
+
 </script>
 </body>
 </html>
